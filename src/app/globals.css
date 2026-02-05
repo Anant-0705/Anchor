@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #09090b; /* Zinc 950 */
+
+  --primary: #2563eb; /* Blue 600 */
+  --primary-foreground: #ffffff;
+
+  --secondary: #f4f4f5; /* Zinc 100 */
+  --secondary-foreground: #18181b; /* Zinc 900 */
+
+  --muted: #f4f4f5; /* Zinc 100 */
+  --muted-foreground: #71717a; /* Zinc 500 */
+
+  --accent: #f4f4f5; /* Zinc 100 */
+  --accent-foreground: #18181b; /* Zinc 900 */
+
+  --destructive: #ef4444; /* Red 500 */
+  --destructive-foreground: #ffffff;
+
+  --border: #e4e4e7; /* Zinc 200 */
+  --input: #e4e4e7; /* Zinc 200 */
+  --ring: #2563eb;
+
+  --radius: 0.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #09090b; /* Zinc 950 */
+    --foreground: #fafafa; /* Zinc 50 */
+
+    --primary: #3b82f6; /* Blue 500 */
+    --primary-foreground: #ffffff;
+
+    --secondary: #27272a; /* Zinc 800 */
+    --secondary-foreground: #fafafa; /* Zinc 50 */
+
+    --muted: #27272a; /* Zinc 800 */
+    --muted-foreground: #a1a1aa; /* Zinc 400 */
+
+    --accent: #27272a; /* Zinc 800 */
+    --accent-foreground: #fafafa; /* Zinc 50 */
+
+    --destructive: #7f1d1d; /* Red 900 */
+    --destructive-foreground: #fef2f2; /* Red 50 */
+
+    --border: #27272a; /* Zinc 800 */
+    --input: #27272a; /* Zinc 800 */
+    --ring: #1d4ed8;
+  }
+}
+
+/* Base Styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-card {
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Smooth Gradients */
+.bg-gradient-mesh {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(at 80% 0%, hsla(210,100%,93%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(240,100%,96%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(280,100%,96%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(220,100%,96%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(240,100%,96%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(260,100%,96%,1) 0px, transparent 50%);
+}
+
+.dark .bg-gradient-mesh {
+  background-color: #09090b;
+  background-image: 
+    radial-gradient(at 80% 0%, hsla(210,30%,20%,0.5) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(240,30%,20%,0.5) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(280,30%,20%,0.5) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(220,30%,20%,0.5) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(240,30%,20%,0.5) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(260,30%,20%,0.5) 0px, transparent 50%);
+}
