@@ -7,20 +7,29 @@ import { DashboardData, EmotionState } from '@/types'
 import { EmotionCheckin } from '@/components/forms/EmotionCheckin'
 import { GlassCard } from '@/components/ui/glass-card'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { getEmotionColor, getEmotionEmoji, getStreakStateColor, getDifficultyColor, formatRelativeDate } from '@/lib/utils'
-import { Flame, CheckCircle2, Circle, TrendingUp, Calendar, AlertCircle } from 'lucide-react'
+import { Flame, CheckCircle2, Circle, TrendingUp, Calendar, AlertCircle, ListTodo, Brain, Lightbulb, Zap } from 'lucide-react'
+import { CompleteHabitModal } from '@/components/forms/CompleteHabitModal'
+import { AINotification } from '@/components/ui/AINotification'
 
 export default function DashboardPage() {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
   const [checkinLoading, setCheckinLoading] = useState(false)
+  const [completeHabit, setCompleteHabit] = useState<any>(null)
+  const [aiInsights, setAiInsights] = useState<any>(null)
+  const [aiLoading, setAiLoading] = useState(false)
+  const [aiNotification, setAiNotification] = useState<any>(null)
+  const [showAiNotification, setShowAiNotification] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
   const supabase = createClient()
 
   useEffect(() => {
     loadDashboard()
+    loadAIInsights()
   }, [])
 
   const loadDashboard = async () => {
@@ -33,6 +42,13 @@ export default function DashboardPage() {
       const response = await fetch('/api/dashboard')
       if (!response.ok) throw new Error('Failed to load dashboard')
       const result = await response.json()
+      
+      // Check if user needs onboarding
+      if (!result.data.user.onboarded_at && result.data.activeStreaks.length === 0) {
+        router.push('/onboarding')
+        return
+      }
+      
       setDashboardData(result.data)
     } catch (err) {
       setError('Failed to load dashboard data')
@@ -54,10 +70,104 @@ export default function DashboardPage() {
       })
       if (!response.ok) throw new Error('Failed to save emotion check-in')
       await loadDashboard()
+      
+      // Trigger AI decision after emotion check-in
+      if (emotion === 'low' || emotion === 'overwhelmed') {
+        setTimeout(() => triggerAIDecision(), 2000)
+      }
     } catch (err) {
       setError('Failed to save emotion check-in')
     } finally {
       setCheckinLoading(false)
+    }
+  }
+
+  const handleCompleteHabit = async (habitId: string, data: { difficulty_completed: number; notes?: string }) => {
+    try {
+      const response = await fetch(`/api/habits/${habitId}/complete`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      
+      if (!response.ok) throw new Error('Failed to complete habit')
+      await loadDashboard()
+      setCompleteHabit(null)
+      
+      // Trigger AI decision periodically (after every few completions)
+      const completionCount = dashboardData?.recentCompletions.filter(c => 
+        c.date === new Date().toISOString().split('T')[0]
+      ).length || 0
+      
+      if (completionCount % 2 === 1) { // Every other completion
+        setTimeout(() => triggerAIDecision(), 3000)
+      }
+    } catch (err) {
+      setError('Failed to complete habit')
+      console.error(err)
+    }
+  }
+
+  const handleCompleteTask = async (taskId: string) => {
+    try {
+      const response = await fetch(`/api/tasks/${taskId}/complete`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      
+      if (!response.ok) throw new Error('Failed to complete task')
+      await loadDashboard()
+    } catch (err) {
+      setError('Failed to complete task')
+      console.error(err)
+    }
+  }
+
+  const loadAIInsights = async () => {
+    try {
+      setAiLoading(true)
+      const response = await fetch('/api/ai/insights')
+      if (response.ok) {
+        const result = await response.json()
+        setAiInsights(result.data)
+      }
+    } catch (err) {
+      // AI insights are optional, don't show error
+      console.warn('Failed to load AI insights:', err)
+    } finally {
+      setAiLoading(false)
+    }
+  }
+
+  const triggerAIDecision = async () => {
+    try {
+      setAiLoading(true)
+      const response = await fetch('/api/ai/decision', {
+        method: 'POST',
+      })
+      
+      if (response.ok) {
+        const result = await response.json()
+        setAiInsights((prev: any) => ({
+          ...prev,
+          lastDecision: result.data,
+          lastUpdated: new Date().toISOString()
+        }))
+        
+        // Show AI notification
+        setAiNotification(result.data)
+        setShowAiNotification(true)
+        
+        await loadDashboard() // Refresh to show any changes
+      }
+    } catch (err) {
+      console.error('Failed to trigger AI decision:', err)
+    } finally {
+      setAiLoading(false)
     }
   }
 
@@ -129,9 +239,17 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-500">Welcome back, {dashboardData.user.full_name?.split(' ')[0]}</p>
         </div>
-        <div className="text-sm font-medium text-gray-500 flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-100">
-          <Calendar className="w-4 h-4" />
-          {new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
+        <div className="flex items-center gap-4">
+          <Link href="/analytics">
+            <Button variant="outline" size="sm" className="text-purple-600 border-purple-200 hover:bg-purple-50">
+              <TrendingUp className="w-4 h-4 mr-2" />
+              Analytics
+            </Button>
+          </Link>
+          <div className="text-sm font-medium text-gray-500 flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-100">
+            <Calendar className="w-4 h-4" />
+            {new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
+          </div>
         </div>
       </div>
 
@@ -171,13 +289,17 @@ export default function DashboardPage() {
                 </span>
                 Active Streaks
               </h3>
-              <Button variant="ghost" size="sm" className="text-blue-600">View All</Button>
+              <Link href="/streaks">
+                <Button variant="ghost" size="sm" className="text-blue-600">View All</Button>
+              </Link>
             </div>
 
             {dashboardData.activeStreaks.length === 0 ? (
               <div className="text-center py-8 text-gray-500">
                 <p>No active streaks. Time to start something new!</p>
-                <Button variant="link" className="text-blue-600">Create Streak</Button>
+                <Link href="/streaks">
+                  <Button variant="link" className="text-blue-600">Create Streak</Button>
+                </Link>
               </div>
             ) : (
               <div className="grid sm:grid-cols-2 gap-4">
@@ -208,46 +330,127 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* AI Insights */}
+        <motion.div variants={item}>
+          <GlassCard className="bg-gradient-to-br from-purple-50 to-blue-50 border-purple-100">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                <span className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600">
+                  <Brain size={18} />
+                </span>
+                AI Guidance
+              </h3>
+              <div className="flex space-x-2">
+                <Link href="/ai-insights">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-purple-600"
+                  >
+                    View History
+                  </Button>
+                </Link>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={triggerAIDecision}
+                  disabled={aiLoading}
+                  className="text-purple-600"
+                >
+                  <Zap className="w-4 h-4 mr-1" />
+                  {aiLoading ? 'Thinking...' : 'Get Advice'}
+                </Button>
+              </div>
+            </div>
+
+            {aiInsights ? (
+              <div className="space-y-4">
+                {/* Next Suggested Action */}
+                <div className="p-3 bg-white rounded-lg border border-purple-200">
+                  <div className="flex items-start gap-3">
+                    <Lightbulb className="w-5 h-5 text-purple-600 mt-0.5" />
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-1">Suggestion</h4>
+                      <p className="text-sm text-gray-700">{aiInsights.nextSuggestedAction}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Insights Grid */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="text-center p-3 bg-white rounded-lg border border-purple-100">
+                    <div className="text-2xl font-bold text-purple-600 mb-1">
+                      {aiInsights.consistency}%
+                    </div>
+                    <div className="text-xs text-gray-600">7-Day Consistency</div>
+                  </div>
+                  <div className="text-center p-3 bg-white rounded-lg border border-purple-100">
+                    <div className="text-sm font-medium text-gray-900 mb-1 capitalize">
+                      {aiInsights.emotionalTrend}
+                    </div>
+                    <div className="text-xs text-gray-600">Mood Trend</div>
+                  </div>
+                </div>
+
+                {/* Recommendations */}
+                {aiInsights.recommendations?.length > 0 && (
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-medium text-gray-900">Recommendations:</h4>
+                    {aiInsights.recommendations.slice(0, 2).map((rec: string, idx: number) => (
+                      <div key={idx} className="text-xs text-gray-600 bg-white p-2 rounded border border-purple-100">
+                        • {rec}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <Brain className="w-12 h-12 mx-auto mb-4 text-purple-300" />
+                <p className="text-sm text-gray-600 mb-4">Get personalized AI guidance based on your patterns</p>
+                <Button 
+                  onClick={loadAIInsights} 
+                  variant="outline"
+                  size="sm"
+                  disabled={aiLoading}
+                  className="border-purple-200 text-purple-600"
+                >
+                  {aiLoading ? 'Loading...' : 'Load Insights'}
+                </Button>
+              </div>
+            )}
+          </GlassCard>
+        </motion.div>
+
         {/* Quick Tasks */}
         <motion.div variants={item}>
           <GlassCard>
-            <h3 className="font-semibold text-gray-900 mb-6 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center text-green-600">
-                <CheckCircle2 size={18} />
-              </span>
-              Today's Focus
-            </h3>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                <span className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center text-green-600">
+                  <CheckCircle2 size={18} />
+                </span>
+                Today's Focus
+              </h3>
+              <Link href="/tasks">
+                <Button variant="ghost" size="sm" className="text-blue-600">View All Tasks</Button>
+              </Link>
+            </div>
 
             <div className="space-y-3">
-              {[...dashboardData.todayHabits, ...dashboardData.todayTasks].length === 0 ? (
-                <p className="text-gray-500 text-center py-4">All caught up for today!</p>
-              ) : (
-                <>
-                  {dashboardData.todayHabits.map((habit) => (
-                    <div key={habit.id} className="flex items-center group p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
-                      <button className="flex-shrink-0 w-5 h-5 rounded-full border-2 border-gray-300 mr-3 hover:border-blue-500 hover:bg-blue-50 transition-colors"></button>
-                      <div className="flex-1">
-                        <p className="font-medium text-gray-900">{habit.title}</p>
-                        <p className="text-xs text-gray-500 flex items-center gap-2">
-                          <span className={`w-2 h-2 rounded-full ${getDifficultyColor(habit.difficulty_level).replace('bg-', 'bg-')}`}></span>
-                          {habit.estimated_minutes} min
-                        </p>
-                      </div>
-                      <Button size="sm" variant="ghost" className="opacity-0 group-hover:opacity-100 transition-opacity">Complete</Button>
-                    </div>
-                  ))}
-                  {dashboardData.todayTasks.filter(t => !t.is_completed).map((task) => (
-                    <div key={task.id} className="flex items-center group p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
-                      <button className="flex-shrink-0 w-5 h-5 rounded border-2 border-gray-300 mr-3 hover:border-blue-500 hover:bg-blue-50 transition-colors"></button>
-                      <div className="flex-1">
-                        <p className="font-medium text-gray-900">{task.title}</p>
-                        <p className="text-xs text-gray-500">Effort calculation...</p>
-                      </div>
-                      <Button size="sm" variant="ghost" className="opacity-0 group-hover:opacity-100 transition-opacity">Done</Button>
-                    </div>
-                  ))}
-                </>
-              )}
+              {dashboardData.todayTasks.filter(t => !t.is_completed).map((task) => (
+                <div key={task.id} className="flex items-center group p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
+                  <button
+                    onClick={() => handleCompleteTask(task.id)}
+                    className="flex-shrink-0 w-5 h-5 rounded border-2 border-gray-300 mr-3 hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                  />
+                  <div className="flex-1">
+                    <p className="font-medium text-gray-900">{task.title}</p>
+                    <p className="text-xs text-gray-500">Effort: {task.estimated_effort}/5</p>
+                  </div>
+                  <Button size="sm" variant="ghost" className="opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => handleCompleteTask(task.id)}>Done</Button>
+                </div>
+              ))}
             </div>
           </GlassCard>
         </motion.div>
@@ -278,6 +481,23 @@ export default function DashboardPage() {
           </GlassCard>
         </motion.div>
       </div>
+
+      {completeHabit && (
+        <CompleteHabitModal
+          isOpen={true}
+          onClose={() => setCompleteHabit(null)}
+          onSubmit={(data) => handleCompleteHabit(completeHabit.id, data)}
+          habit={completeHabit}
+        />
+      )}
+
+      {aiNotification && (
+        <AINotification
+          isVisible={showAiNotification}
+          onClose={() => setShowAiNotification(false)}
+          decision={aiNotification}
+        />
+      )}
     </motion.div>
   )
 }

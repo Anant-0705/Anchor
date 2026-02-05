@@ -36,10 +36,10 @@ export default function DashboardLayout({
 
     const menuItems = [
         { icon: LayoutDashboard, label: 'Overview', href: '/dashboard' },
-        { icon: Target, label: 'Habits', href: '/dashboard/habits' },
-        { icon: ListTodo, label: 'Tasks', href: '/dashboard/tasks' },
-        { icon: User, label: 'Profile', href: '/dashboard/profile' },
-        { icon: Settings, label: 'Settings', href: '/dashboard/settings' },
+        { icon: Target, label: 'Streaks', href: '/streaks' },
+        { icon: ListTodo, label: 'Tasks', href: '/tasks' },
+        { icon: User, label: 'Analytics', href: '/analytics' },
+        { icon: Settings, label: 'Settings', href: '/settings' },
     ]
 
     return (
