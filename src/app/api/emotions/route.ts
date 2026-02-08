@@ -30,10 +30,10 @@ export const POST = withAuth(async function(
       .single()
 
     if (existing) {
-      // Update existing check-in
+      // Update existing check-in  
       const { data, error } = await supabase
         .from('emotion_checkins')
-        .update({ emotion, notes, created_at: new Date().toISOString() })
+        .update({ emotion, notes })
         .eq('id', existing.id)
         .select()
         .single()

@@ -36,7 +36,7 @@ export default function Home() {
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
                 A
               </div>
-              <h1 className="text-2xl font-bold tracking-tight">Anchor</h1>
+              <h1 className="text-2xl font-bold tracking-tight text-black">Anchor</h1>
             </motion.div>
 
             <motion.div
@@ -45,7 +45,7 @@ export default function Home() {
               className="flex items-center space-x-4"
             >
               <Link href="/login">
-                <Button variant="ghost" className="text-base font-medium">Sign In</Button>
+                <Button variant="ghost" className="text-base font-medium text-black">Sign In</Button>
               </Link>
               <Link href="/register">
                 <Button className="font-semibold shadow-lg shadow-blue-500/20">

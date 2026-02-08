@@ -9,7 +9,7 @@ import { GlassCard } from '@/components/ui/glass-card'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import { getEmotionColor, getEmotionEmoji, getStreakStateColor, getDifficultyColor, formatRelativeDate } from '@/lib/utils'
-import { Flame, CheckCircle2, Circle, TrendingUp, Calendar, AlertCircle } from 'lucide-react'
+import { Flame, CheckCircle2, Circle, TrendingUp, Calendar, AlertCircle, ListTodo } from 'lucide-react'
 
 export default function DashboardPage() {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)

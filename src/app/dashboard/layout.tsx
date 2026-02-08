@@ -70,7 +70,11 @@ export default function DashboardLayout({
                     {menuItems.map((item) => {
                         const isActive = pathname === item.href
                         return (
-                            <Link key={item.href} href={item.href}>
+                            <div 
+                                key={item.href} 
+                                onClick={() => router.push(item.href as any)}
+                                className="cursor-pointer"
+                            >
                                 <div className={cn(
                                     "flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 group",
                                     isActive
@@ -82,7 +86,7 @@ export default function DashboardLayout({
                                         <span className="font-medium whitespace-nowrap">{item.label}</span>
                                     )}
                                 </div>
-                            </Link>
+                            </div>
                         )
                     })}
                 </nav>

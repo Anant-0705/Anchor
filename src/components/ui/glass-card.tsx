@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { ComponentProps } from 'react'
 
-interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassCardProps extends Omit<ComponentProps<typeof motion.div>, 'onDrag'> {
   children: React.ReactNode
   className?: string
   hoverEffect?: boolean

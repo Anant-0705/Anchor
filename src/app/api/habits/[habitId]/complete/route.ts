@@ -9,9 +9,9 @@ const completeHabitSchema = z.object({
 })
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     habitId: string
-  }
+  }>
 }
 
 // POST /api/habits/[habitId]/complete - Complete a habit for today
@@ -19,21 +19,29 @@ export async function POST(
   request: NextRequest,
   { params }: RouteParams
 ) {
-  return withAuth(async function(req: NextRequest, context: AuthContext) {
-    try {
-      const { habitId } = params
-      const body = await req.json()
-      const { difficulty_completed, notes } = completeHabitSchema.parse(body)
-      
-      const supabase = await createClient()
-      
-      // Verify habit belongs to user
-      const { data: habit, error: habitError } = await supabase
-        .from('habits')
-        .select('*, streaks(id)')
-        .eq('id', habitId)
-        .eq('user_id', context.userId)
-        .single()
+  try {
+    // Auth check
+    const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      )
+    }
+
+    const { habitId } = await params
+    const body = await request.json()
+    const { difficulty_completed, notes } = completeHabitSchema.parse(body)
+    
+    // Verify habit belongs to user
+    const { data: habit, error: habitError } = await supabase
+      .from('habits')
+      .select('*, streaks(id)')
+      .eq('id', habitId)
+      .eq('user_id', user.id)
+      .single()
 
       if (habitError || !habit) {
         return NextResponse.json({ error: 'Habit not found' }, { status: 404 })
@@ -45,7 +53,7 @@ export async function POST(
       const { data: existing } = await supabase
         .from('habit_completions')
         .select('*')
-        .eq('user_id', context.userId)
+        .eq('user_id', user.id)
         .eq('habit_id', habitId)
         .eq('date', today)
         .single()
@@ -58,7 +66,7 @@ export async function POST(
       const { data, error } = await supabase
         .from('habit_completions')
         .insert({
-          user_id: context.userId,
+          user_id: user.id,
           habit_id: habitId,
           streak_id: habit.streaks!.id,
           date: today,
@@ -92,5 +100,4 @@ export async function POST(
         { status: 500 }
       )
     }
-  })(request, context)
 }

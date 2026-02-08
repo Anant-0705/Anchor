@@ -150,7 +150,7 @@ export class AIService {
         .from('ai_decisions')
         .update({
           executed_at: new Date().toISOString(),
-          outcome: { success: false, error: error.message }
+          outcome: { success: false, error: String(error) }
         })
         .eq('id', decisionLogId)
 
