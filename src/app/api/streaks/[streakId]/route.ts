@@ -3,9 +3,9 @@ import { withAuth, AuthContext } from '@/lib/auth/api-helpers'
 import { createClient } from '@/lib/auth/server'
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     streakId: string
-  }
+  }>
 }
 
 // GET /api/streaks/[streakId] - Get a specific streak
@@ -15,7 +15,7 @@ export async function GET(
 ) {
   return withAuth(async function(req: NextRequest, context: AuthContext) {
     try {
-      const { streakId } = params
+      const { streakId } = await params
       const supabase = await createClient()
       
       const { data, error } = await supabase

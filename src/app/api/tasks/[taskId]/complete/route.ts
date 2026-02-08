@@ -3,9 +3,9 @@ import { withAuth, AuthContext } from '@/lib/auth/api-helpers'
 import { createClient } from '@/lib/auth/server'
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     taskId: string
-  }
+  }>
 }
 
 // POST /api/tasks/[taskId]/complete - Complete a task
@@ -15,7 +15,7 @@ export async function POST(
 ) {
   return withAuth(async function(req: NextRequest, context: AuthContext) {
     try {
-      const { taskId } = params
+      const { taskId } = await params
       const supabase = await createClient()
       
       // Verify task belongs to user
