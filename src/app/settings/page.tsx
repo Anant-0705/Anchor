@@ -141,7 +141,7 @@ export default function SettingsPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
+          <h1 className="text-3xl font-bold text-black">Settings</h1>
           <p className="text-gray-500">Manage your account and preferences</p>
         </div>
       </div>
@@ -180,7 +180,7 @@ export default function SettingsPage() {
           <motion.div variants={item} className="flex-1">
             {activeTab === 'profile' && (
               <GlassCard className="p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                <h2 className="text-xl font-semibold text-black mb-6 flex items-center gap-2">
                   <User className="w-5 h-5 text-blue-600" />
                   Profile Information
                 </h2>
@@ -269,7 +269,7 @@ export default function SettingsPage() {
 
             {activeTab === 'notifications' && (
               <GlassCard className="p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                <h2 className="text-xl font-semibold text-black mb-6 flex items-center gap-2">
                   <Bell className="w-5 h-5 text-blue-600" />
                   Notification Preferences
                 </h2>
@@ -283,7 +283,7 @@ export default function SettingsPage() {
                   ].map((item) => (
                     <div key={item.key} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                       <div>
-                        <div className="font-medium text-gray-900">{item.label}</div>
+                        <div className="font-medium text-black">{item.label}</div>
                         <div className="text-sm text-gray-500">{item.desc}</div>
                       </div>
                       <button
@@ -332,7 +332,7 @@ export default function SettingsPage() {
             {activeTab === 'account' && (
               <div className="space-y-6">
                 <GlassCard className="p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                  <h2 className="text-xl font-semibold text-black mb-6 flex items-center gap-2">
                     <Shield className="w-5 h-5 text-blue-600" />
                     Account Details
                   </h2>
@@ -340,7 +340,7 @@ export default function SettingsPage() {
                   <div className="space-y-4">
                     <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
                       <div>
-                        <div className="font-medium text-gray-900">Member Since</div>
+                        <div className="font-medium text-black">Member Since</div>
                         <div className="text-sm text-gray-500">
                           {new Date(profile.created_at).toLocaleDateString('en-US', {
                             year: 'numeric',
@@ -353,7 +353,7 @@ export default function SettingsPage() {
 
                     <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
                       <div>
-                        <div className="font-medium text-gray-900">Account ID</div>
+                        <div className="font-medium text-black">Account ID</div>
                         <div className="text-sm text-gray-500 font-mono">{profile.id.slice(0, 8)}...</div>
                       </div>
                     </div>
@@ -361,7 +361,7 @@ export default function SettingsPage() {
                 </GlassCard>
 
                 <GlassCard className="p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-6">Actions</h2>
+                  <h2 className="text-xl font-semibold text-black mb-6">Actions</h2>
 
                   <div className="space-y-4">
                     <button
@@ -371,7 +371,7 @@ export default function SettingsPage() {
                       <div className="flex items-center gap-3">
                         <LogOut className="w-5 h-5 text-gray-600" />
                         <div className="text-left">
-                          <div className="font-medium text-gray-900">Sign Out</div>
+                          <div className="font-medium text-black">Sign Out</div>
                           <div className="text-sm text-gray-500">Log out of your account</div>
                         </div>
                       </div>

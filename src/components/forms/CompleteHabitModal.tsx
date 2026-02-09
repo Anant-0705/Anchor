@@ -95,7 +95,7 @@ export function CompleteHabitModal({ isOpen, onClose, onSubmit, habit }: Complet
                 <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
                   <CheckCircle2 className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-black mb-2">
                   Great job! 🎉
                 </h3>
                 <p className="text-gray-600">

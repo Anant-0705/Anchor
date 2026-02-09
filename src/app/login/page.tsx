@@ -63,7 +63,7 @@ export default function LoginPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Welcome back</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-black">Welcome back</h1>
             <p className="mt-2 text-gray-600">Sign in to your emotion-aware companion</p>
           </motion.div>
 

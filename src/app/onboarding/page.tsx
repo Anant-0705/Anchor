@@ -159,7 +159,7 @@ export default function OnboardingPage() {
                 <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center">
                   <Sparkles className="w-10 h-10 text-blue-600" />
                 </div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                <h1 className="text-3xl font-bold text-black mb-4">
                   Welcome to Anchor! 🎉
                 </h1>
                 <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
@@ -170,17 +170,17 @@ export default function OnboardingPage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                   <div className="p-4 bg-blue-50 rounded-lg">
                     <Target className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                    <h3 className="font-semibold text-gray-900">Identity-Based</h3>
+                    <h3 className="font-semibold text-black">Identity-Based</h3>
                     <p className="text-sm text-gray-600">Focus on who you want to be</p>
                   </div>
                   <div className="p-4 bg-purple-50 rounded-lg">
                     <Heart className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-                    <h3 className="font-semibold text-gray-900">Emotion-Aware</h3>
+                    <h3 className="font-semibold text-black">Emotion-Aware</h3>
                     <p className="text-sm text-gray-600">Adapts to how you feel</p>
                   </div>
                   <div className="p-4 bg-green-50 rounded-lg">
                     <Brain className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                    <h3 className="font-semibold text-gray-900">AI-Powered</h3>
+                    <h3 className="font-semibold text-black">AI-Powered</h3>
                     <p className="text-sm text-gray-600">Smart guidance without guilt</p>
                   </div>
                 </div>
@@ -212,7 +212,7 @@ export default function OnboardingPage() {
                   <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
                     <Flame className="w-8 h-8 text-orange-600" />
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h2 className="text-2xl font-bold text-black mb-2">
                     The Power of Identity
                   </h2>
                   <p className="text-gray-600">
@@ -230,18 +230,18 @@ export default function OnboardingPage() {
                 </div>
 
                 <div className="bg-gray-50 rounded-lg p-6 mb-8">
-                  <h3 className="font-semibold text-gray-900 mb-3">Examples of Identity Statements:</h3>
+                  <h3 className="font-semibold text-black mb-3">Examples of Identity Statements:</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                    <div className="p-3 bg-white rounded border border-gray-200">
+                    <div className="p-3 bg-white rounded border border-gray-200 text-black">
                       "I am someone who reads every day"
                     </div>
-                    <div className="p-3 bg-white rounded border border-gray-200">
+                    <div className="p-3 bg-white rounded border border-gray-200 text-black">
                       "I am someone who exercises regularly"
                     </div>
-                    <div className="p-3 bg-white rounded border border-gray-200">
+                    <div className="p-3 bg-white rounded border border-gray-200 text-black">
                       "I am someone who practices gratitude"
                     </div>
-                    <div className="p-3 bg-white rounded border border-gray-200">
+                    <div className="p-3 bg-white rounded border border-gray-200 text-black">
                       "I am someone who learns continuously"
                     </div>
                   </div>
@@ -282,7 +282,7 @@ export default function OnboardingPage() {
                   <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
                     <Target className="w-8 h-8 text-green-600" />
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h2 className="text-2xl font-bold text-black mb-2">
                     Create Your First Streak
                   </h2>
                   <p className="text-gray-600">
@@ -362,7 +362,7 @@ export default function OnboardingPage() {
                   <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
                     <Zap className="w-8 h-8 text-purple-600" />
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h2 className="text-2xl font-bold text-black mb-2">
                     Add Your First Habit
                   </h2>
                   <p className="text-gray-600">
@@ -478,7 +478,7 @@ export default function OnboardingPage() {
                   <CheckCircle2 className="w-12 h-12 text-green-600" />
                 </motion.div>
 
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-black mb-4">
                   You're All Set! 🎉
                 </h2>
                 <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
@@ -486,8 +486,8 @@ export default function OnboardingPage() {
                   by doing your daily emotion check-in.
                 </p>
 
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 mb-8">
-                  <h3 className="font-semibold text-gray-900 mb-4">What happens next:</h3>
+                <div className="bg-linear-to-r from-blue-50 to-purple-50 rounded-lg p-6 mb-8">
+                  <h3 className="font-semibold text-black mb-4">What happens next:</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                     <div className="text-center">
                       <div className="w-10 h-10 mx-auto mb-2 bg-blue-100 rounded-full flex items-center justify-center">

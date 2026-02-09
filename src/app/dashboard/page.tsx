@@ -200,7 +200,7 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Good morning! ☀️</h1>
+          <h1 className="text-4xl font-bold text-black mb-4">Good morning! ☀️</h1>
           <p className="text-lg text-gray-600">Before we dive in, how are you feeling today?</p>
         </motion.div>
 
@@ -236,7 +236,7 @@ export default function DashboardPage() {
     >
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+          <h1 className="text-3xl font-bold text-black">Dashboard</h1>
           <p className="text-gray-500">Welcome back, {dashboardData.user.full_name?.split(' ')[0]}</p>
         </div>
         <div className="flex items-center gap-4">
@@ -257,7 +257,7 @@ export default function DashboardPage() {
         {/* Mood Widget */}
         <motion.div variants={item} className="md:col-span-1">
           <GlassCard className="h-full bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-100">
-            <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <h3 className="font-semibold text-black mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600">
                 <TrendingUp size={18} />
               </span>
@@ -283,7 +283,7 @@ export default function DashboardPage() {
         <motion.div variants={item} className="md:col-span-2">
           <GlassCard className="h-full">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+              <h3 className="font-semibold text-black flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600">
                   <Flame size={18} />
                 </span>
@@ -306,13 +306,13 @@ export default function DashboardPage() {
                 {dashboardData.activeStreaks.map((streak) => (
                   <div key={streak.id} className="group p-4 rounded-xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 hover:shadow-md transition-all">
                     <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-semibold text-gray-900">{streak.title}</h4>
+                      <h4 className="font-semibold text-black">{streak.title}</h4>
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${getStreakStateColor(streak.state)}`}>
                         {streak.state}
                       </span>
                     </div>
                     <div className="flex items-end gap-2">
-                      <span className="text-3xl font-bold text-gray-900">{streak.current_count}</span>
+                      <span className="text-3xl font-bold text-black">{streak.current_count}</span>
                       <span className="text-sm text-gray-500 mb-1.5">days</span>
                     </div>
                     <div className="mt-2 w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
@@ -334,7 +334,7 @@ export default function DashboardPage() {
         <motion.div variants={item}>
           <GlassCard className="bg-gradient-to-br from-purple-50 to-blue-50 border-purple-100">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+              <h3 className="font-semibold text-black flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600">
                   <Brain size={18} />
                 </span>
@@ -370,7 +370,7 @@ export default function DashboardPage() {
                   <div className="flex items-start gap-3">
                     <Lightbulb className="w-5 h-5 text-purple-600 mt-0.5" />
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-1">Suggestion</h4>
+                      <h4 className="font-medium text-black mb-1">Suggestion</h4>
                       <p className="text-sm text-gray-700">{aiInsights.nextSuggestedAction}</p>
                     </div>
                   </div>
@@ -385,7 +385,7 @@ export default function DashboardPage() {
                     <div className="text-xs text-gray-600">7-Day Consistency</div>
                   </div>
                   <div className="text-center p-3 bg-white rounded-lg border border-purple-100">
-                    <div className="text-sm font-medium text-gray-900 mb-1 capitalize">
+                    <div className="text-sm font-medium text-black mb-1 capitalize">
                       {aiInsights.emotionalTrend}
                     </div>
                     <div className="text-xs text-gray-600">Mood Trend</div>
@@ -395,7 +395,7 @@ export default function DashboardPage() {
                 {/* Recommendations */}
                 {aiInsights.recommendations?.length > 0 && (
                   <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-gray-900">Recommendations:</h4>
+                    <h4 className="text-sm font-medium text-black">Recommendations:</h4>
                     {aiInsights.recommendations.slice(0, 2).map((rec: string, idx: number) => (
                       <div key={idx} className="text-xs text-gray-600 bg-white p-2 rounded border border-purple-100">
                         • {rec}
@@ -426,7 +426,7 @@ export default function DashboardPage() {
         <motion.div variants={item}>
           <GlassCard>
             <div className="flex items-center justify-between mb-6">
-              <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+              <h3 className="font-semibold text-black flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center text-green-600">
                   <CheckCircle2 size={18} />
                 </span>
@@ -458,7 +458,7 @@ export default function DashboardPage() {
         {/* Recent Activity */}
         <motion.div variants={item}>
           <GlassCard>
-            <h3 className="font-semibold text-gray-900 mb-6 flex items-center gap-2">
+            <h3 className="font-semibold text-black mb-6 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
                 <ListTodo size={18} />
               </span>

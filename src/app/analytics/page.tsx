@@ -104,7 +104,7 @@ export default function AnalyticsPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Analytics</h1>
+            <h1 className="text-3xl font-bold text-black">Analytics</h1>
             <p className="text-gray-500">Track your progress and patterns</p>
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function AnalyticsPage() {
                 <div className="w-12 h-12 mx-auto mb-3 bg-blue-100 rounded-full flex items-center justify-center">
                   <CheckCircle2 className="w-6 h-6 text-blue-600" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-1">
+                <div className="text-3xl font-bold text-black mb-1">
                   {data.habitStats.totalCompletions}
                 </div>
                 <div className="text-sm text-gray-600">Total Completions</div>
@@ -150,7 +150,7 @@ export default function AnalyticsPage() {
                 <div className="w-12 h-12 mx-auto mb-3 bg-orange-100 rounded-full flex items-center justify-center">
                   <Flame className="w-6 h-6 text-orange-600" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-1">
+                <div className="text-3xl font-bold text-black mb-1">
                   {data.streakStats.currentBestStreak}
                 </div>
                 <div className="text-sm text-gray-600">Best Current Streak</div>
@@ -162,7 +162,7 @@ export default function AnalyticsPage() {
                 <div className="w-12 h-12 mx-auto mb-3 bg-green-100 rounded-full flex items-center justify-center">
                   <Target className="w-6 h-6 text-green-600" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-1">
+                <div className="text-3xl font-bold text-black mb-1">
                   {Math.round(data.consistencyScore)}%
                 </div>
                 <div className="text-sm text-gray-600">Consistency Score</div>
@@ -174,7 +174,7 @@ export default function AnalyticsPage() {
                 <div className="w-12 h-12 mx-auto mb-3 bg-purple-100 rounded-full flex items-center justify-center">
                   <TrendingUp className="w-6 h-6 text-purple-600" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-1 capitalize">
+                <div className="text-3xl font-bold text-black mb-1 capitalize">
                   {data.weeklyTrend}
                 </div>
                 <div className="text-sm text-gray-600">Weekly Trend</div>
@@ -187,7 +187,7 @@ export default function AnalyticsPage() {
             <motion.div variants={item}>
               <GlassCard className="p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                  <h3 className="font-semibold text-black flex items-center gap-2">
                     <BarChart3 className="w-5 h-5 text-blue-600" />
                     Daily Completions
                   </h3>
@@ -221,7 +221,7 @@ export default function AnalyticsPage() {
             <motion.div variants={item}>
               <GlassCard className="p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                  <h3 className="font-semibold text-black flex items-center gap-2">
                     <Heart className="w-5 h-5 text-pink-600" />
                     Emotion History
                   </h3>
@@ -236,7 +236,7 @@ export default function AnalyticsPage() {
                         <div className="flex items-center gap-3">
                           <span className="text-2xl">{getEmotionEmoji(entry.emotion)}</span>
                           <div>
-                            <div className="font-medium text-gray-900 capitalize">{entry.emotion}</div>
+                            <div className="font-medium text-black capitalize">{entry.emotion}</div>
                             <div className="text-xs text-gray-500">
                               {new Date(entry.date).toLocaleDateString('en-US', { 
                                 weekday: 'short', 
@@ -261,7 +261,7 @@ export default function AnalyticsPage() {
           <motion.div variants={item}>
             <GlassCard className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                <h3 className="font-semibold text-black flex items-center gap-2">
                   <Activity className="w-5 h-5 text-orange-600" />
                   Streak Overview
                 </h3>
@@ -272,7 +272,7 @@ export default function AnalyticsPage() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-gray-900 mb-1">
+                  <div className="text-4xl font-bold text-black mb-1">
                     {data.streakStats.totalStreaks}
                   </div>
                   <div className="text-sm text-gray-600">Active Streaks</div>
@@ -309,14 +309,14 @@ export default function AnalyticsPage() {
           {/* Insights */}
           <motion.div variants={item}>
             <GlassCard className="p-6 bg-gradient-to-r from-purple-50 to-blue-50">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="font-semibold text-black mb-4 flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-purple-600" />
                 Key Insights
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 bg-white rounded-lg border border-purple-100">
-                  <h4 className="font-medium text-gray-900 mb-2">Completion Rate</h4>
+                  <h4 className="font-medium text-black mb-2">Completion Rate</h4>
                   <div className="flex items-center gap-4">
                     <div className="text-3xl font-bold text-purple-600">
                       {Math.round(data.habitStats.completionRate)}%
@@ -333,7 +333,7 @@ export default function AnalyticsPage() {
                 </div>
 
                 <div className="p-4 bg-white rounded-lg border border-blue-100">
-                  <h4 className="font-medium text-gray-900 mb-2">Average Difficulty</h4>
+                  <h4 className="font-medium text-black mb-2">Average Difficulty</h4>
                   <div className="flex items-center gap-4">
                     <div className="text-3xl font-bold text-blue-600">
                       {data.habitStats.averageDifficulty.toFixed(1)}/5

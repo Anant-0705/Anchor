@@ -120,7 +120,7 @@ export function CreateStreakModal({ isOpen, onClose, onSubmit }: CreateStreakMod
               </div>
 
               <div className="bg-gray-50 rounded-lg p-4">
-                <h4 className="font-medium text-gray-900 mb-2">Examples of great streaks:</h4>
+                <h4 className="font-medium text-black mb-2">Examples of great streaks:</h4>
                 <ul className="text-sm text-gray-600 space-y-1">
                   <li>• "I am someone who reads every day"</li>
                   <li>• "I am someone who practices gratitude daily"</li>

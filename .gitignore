@@ -51,3 +51,5 @@ observability-data/
 # Database
 *.sqlite
 *.db
+
+.vercel

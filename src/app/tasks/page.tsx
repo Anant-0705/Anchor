@@ -120,7 +120,7 @@ export default function TasksPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Tasks</h1>
+            <h1 className="text-3xl font-bold text-black">Tasks</h1>
             <p className="text-gray-500">Manage your daily productivity tasks</p>
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function TasksPage() {
         <motion.div variants={item}>
           <GlassCard>
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+              <h3 className="text-xl font-semibold text-black flex items-center gap-2">
                 <Circle className="w-5 h-5 text-orange-500" />
                 Pending ({pendingTasks.length})
               </h3>
@@ -166,7 +166,7 @@ export default function TasksPage() {
                           className="w-5 h-5 rounded border-2 border-gray-300 hover:border-green-500 hover:bg-green-50 transition-colors mt-0.5"
                         />
                         <div className="flex-1">
-                          <h4 className="font-medium text-gray-900 mb-1">{task.title}</h4>
+                          <h4 className="font-medium text-black mb-1">{task.title}</h4>
                           {task.description && (
                             <p className="text-sm text-gray-600 mb-2">{task.description}</p>
                           )}
@@ -200,7 +200,7 @@ export default function TasksPage() {
         <motion.div variants={item}>
           <GlassCard>
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+              <h3 className="text-xl font-semibold text-black flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-green-500" />
                 Completed ({completedTasks.length})
               </h3>
@@ -218,7 +218,7 @@ export default function TasksPage() {
                     <div className="flex items-start space-x-3">
                       <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 line-through mb-1">{task.title}</h4>
+                        <h4 className="font-medium text-black line-through mb-1">{task.title}</h4>
                         {task.description && (
                           <p className="text-sm text-gray-600 mb-2">{task.description}</p>
                         )}

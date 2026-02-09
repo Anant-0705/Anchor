@@ -119,7 +119,7 @@ export default function AIInsightsPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">AI Insights</h1>
+            <h1 className="text-3xl font-bold text-black">AI Insights</h1>
             <p className="text-gray-500">See how Anchor's AI is helping optimize your journey</p>
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function AIInsightsPage() {
           <div className="w-24 h-24 mx-auto mb-6 bg-purple-100 rounded-full flex items-center justify-center">
             <Brain className="w-12 h-12 text-purple-400" />
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">No AI insights yet</h3>
+          <h3 className="text-xl font-semibold text-black mb-2">No AI insights yet</h3>
           <p className="text-gray-600 mb-6 max-w-md mx-auto">
             As you use Anchor, our AI will analyze your patterns and provide personalized guidance
             to help optimize your habits and maintain consistency.
@@ -158,7 +158,7 @@ export default function AIInsightsPage() {
         <div className="space-y-6">
           <motion.div variants={item}>
             <GlassCard className="bg-gradient-to-br from-purple-50 to-blue-50 border-purple-100 p-6">
-              <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <h3 className="font-semibold text-black mb-3 flex items-center gap-2">
                 <Brain className="w-5 h-5 text-purple-600" />
                 How AI Helps You
               </h3>
@@ -196,7 +196,7 @@ export default function AIInsightsPage() {
           </motion.div>
 
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Recent AI Decisions</h3>
+            <h3 className="text-lg font-semibold text-black">Recent AI Decisions</h3>
             {decisions.map((decision: any) => (
               <motion.div key={decision.id} variants={item}>
                 <GlassCard className="p-6">
@@ -204,7 +204,7 @@ export default function AIInsightsPage() {
                     <div className="flex items-center gap-3">
                       {getActionIcon(decision.decision_type)}
                       <div>
-                        <h4 className="font-semibold text-gray-900">
+                        <h4 className="font-semibold text-black">
                           {getActionTitle(decision.decision_type)}
                         </h4>
                         <p className="text-sm text-gray-500 flex items-center gap-2 mt-1">

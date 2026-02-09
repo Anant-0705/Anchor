@@ -56,7 +56,7 @@ export default function RegisterPage() {
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
             <CheckCircle2 size={32} />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Check your email</h2>
+          <h2 className="text-2xl font-bold text-black mb-2">Check your email</h2>
           <p className="text-gray-600 mb-8">
             We've sent a confirmation link to <span className="font-medium text-gray-900">{email}</span>.
             <br />Click it to activate your account.
@@ -91,7 +91,7 @@ export default function RegisterPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Create an account</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-black">Create an account</h1>
             <p className="mt-2 text-gray-600">Start your journey to guilt-free productivity</p>
           </motion.div>
 

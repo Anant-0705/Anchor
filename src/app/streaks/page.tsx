@@ -100,7 +100,7 @@ export default function StreaksPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">My Streaks</h1>
+            <h1 className="text-3xl font-bold text-black">My Streaks</h1>
             <p className="text-gray-500">Build habits around who you want to be</p>
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function StreaksPage() {
           <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
             <Target className="w-12 h-12 text-gray-400" />
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">No streaks yet</h3>
+          <h3 className="text-xl font-semibold text-black mb-2">No streaks yet</h3>
           <p className="text-gray-600 mb-6 max-w-md mx-auto">
             Start building consistent habits by creating your first identity-based streak. 
             Think "I am someone who..." instead of "I want to do..."
@@ -153,7 +153,7 @@ export default function StreaksPage() {
                   </div>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{streak.title}</h3>
+                <h3 className="text-lg font-semibold text-black mb-2">{streak.title}</h3>
                 
                 {streak.description && (
                   <p className="text-sm text-gray-600 mb-4">{streak.description}</p>
@@ -161,11 +161,11 @@ export default function StreaksPage() {
 
                 <div className="flex items-end justify-between mb-4">
                   <div>
-                    <div className="text-3xl font-bold text-gray-900">{streak.current_count}</div>
+                    <div className="text-3xl font-bold text-black">{streak.current_count}</div>
                     <div className="text-sm text-gray-500">Current streak</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-semibold text-gray-700">{streak.longest_count}</div>
+                    <div className="text-lg font-semibold text-black">{streak.longest_count}</div>
                     <div className="text-xs text-gray-500">Best ever</div>
                   </div>
                 </div>

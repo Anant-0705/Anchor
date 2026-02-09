@@ -77,7 +77,7 @@ export function AINotification({ isVisible, onClose, decision }: AINotificationP
             </div>
 
             <div className="p-4">
-              <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+              <h4 className="font-semibold text-black mb-2 flex items-center gap-2">
                 {getActionIcon(decision.action)}
                 {getActionTitle(decision.action)}
               </h4>

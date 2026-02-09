@@ -110,7 +110,7 @@ export default function StreakHabitsPage() {
   if (!streak) {
     return (
       <div className="text-center py-16">
-        <h1 className="text-xl font-semibold text-gray-900 mb-2">Streak not found</h1>
+        <h1 className="text-xl font-semibold text-black mb-2">Streak not found</h1>
         <Link href="/streaks">
           <Button variant="outline">Back to Streaks</Button>
         </Link>
@@ -147,7 +147,7 @@ export default function StreakHabitsPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">{streak.title}</h1>
+            <h1 className="text-3xl font-bold text-black">{streak.title}</h1>
             <p className="text-gray-500">Manage your daily habits</p>
           </div>
         </div>
@@ -174,7 +174,7 @@ export default function StreakHabitsPage() {
           <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
             <Zap className="w-12 h-12 text-gray-400" />
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">No habits yet</h3>
+          <h3 className="text-xl font-semibold text-black mb-2">No habits yet</h3>
           <p className="text-gray-600 mb-6 max-w-md mx-auto">
             Add specific daily actions that will help you maintain this streak. 
             Keep them simple and achievable!
@@ -198,7 +198,7 @@ export default function StreakHabitsPage() {
                       <CheckCircle2 className="w-5 h-5 text-gray-400 hover:text-blue-500" />
                     </button>
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900">{habit.title}</h3>
+                      <h3 className="text-lg font-semibold text-black">{habit.title}</h3>
                       {habit.description && (
                         <p className="text-sm text-gray-600 mt-1">{habit.description}</p>
                       )}
